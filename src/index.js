@@ -1,12 +1,53 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from "react";
+import { CSSTransition } from "react-transition-group";
+import ReactDOM from "react-dom";
+import cx from "classnames";
+import "./index.css";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class App extends Component {
+  state = {
+    showBalloon: false
+  };
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  toggle = () => {
+    this.setState(prevState => ({
+      showBalloon: !prevState.showBalloon
+    }));
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <button
+          className={cx("toggler", {
+            "toggler--active": this.state.showBalloon
+          })}
+          onClick={this.toggle}
+        >
+          Menu
+        </button>
+
+        <CSSTransition
+          in={this.state.showBalloon}
+          timeout={350}
+          classNames="balloon"
+          unmountOnExit
+        >
+          <div className="menu">
+            <ul className="list">
+              <li className="list-item">Home</li>
+              <li className="list-item">Profile</li>
+              <li className="list-item">Favorites</li>
+              <li className="list-item">Sign out</li>
+            </ul>
+          </div>
+        </CSSTransition>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
