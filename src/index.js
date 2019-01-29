@@ -75,13 +75,13 @@ class App extends Component {
         </ul>
         <div className="favorites">
           <p>My Favorites:</p>
-          <TransitionGroup>
+          <TransitionGroup component={null}>
             {this.state.favorites.map(({ id, name }) => (
               <CSSTransition 
-                timeout={500} 
+                timeout={500}
                 classNames="fade" 
                 key={id}>
-                  <div className="favorite">{name}</div>
+                  <li className="favorite">{name}</li>
               </CSSTransition>
             ))}
           </TransitionGroup>
