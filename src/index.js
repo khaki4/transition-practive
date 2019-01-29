@@ -1,42 +1,39 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
-import uuid from 'uuid';
-import './index.css';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import uuid from "uuid";
+import "./index.css";
 
 class App extends Component {
   items = [
     {
-      name: 'Potato',
-      id: uuid(),
+      name: "Potato",
+      id: uuid()
     },
     {
-      name: 'Carrot',
-      id: uuid(),
+      name: "Carrot",
+      id: uuid()
     },
     {
-      name: 'Pepper',
-      id: uuid(),
+      name: "Pepper",
+      id: uuid()
     },
     {
-      name: 'Eggplant',
-      id: uuid(),
+      name: "Eggplant",
+      id: uuid()
     },
     {
-      name: 'Onion',
-      id: uuid(),
+      name: "Onion",
+      id: uuid()
     },
     {
-      name: 'Garlic',
-      id: uuid(),
-    },
+      name: "Garlic",
+      id: uuid()
+    }
   ];
 
   state = {
-    favorites: [],
+    favorites: []
   };
 
   toggleInFavorites = id => {
@@ -46,14 +43,12 @@ class App extends Component {
     );
     if (isItemInFavorites) {
       // Item is already in favorites, remove it.
-      favorites = this.state.favorites.filter(
-        favorite => favorite.id !== id
-      );
+      favorites = this.state.favorites.filter(favorite => favorite.id !== id);
     } else {
       // Item is not in favorites, add it.
       favorites = [
         ...this.state.favorites,
-        this.items.find(item => id === item.id),
+        this.items.find(item => id === item.id)
       ];
     }
     this.setState({ favorites });
@@ -67,37 +62,31 @@ class App extends Component {
             <li
               key={id}
               className="ingredient"
-              onClick={() =>
-                this.toggleInFavorites(id)
-              }
+              onClick={() => this.toggleInFavorites(id)}
             >
               {name}
               <span className="star">
-                {this.state.favorites.find(
-                  favorite => favorite.id === id
-                )
-                  ? '★'
-                  : '☆'}
+                {this.state.favorites.find(favorite => favorite.id === id)
+                  ? "★"
+                  : "☆"}
               </span>
             </li>
           ))}
         </ul>
         <div className="favorites">
           <p>My Favorites:</p>
-          <TransitionGroup component={null}>
-            {this.state.favorites.map(
-              ({ id, name }) => (
-                <CSSTransition
-                  timeout={500}
-                  classNames="fade"
-                  key={id}
-                >
-                  <li className="favorite">{name}</li>
-                </CSSTransition>
-              )
-            )}
+          <TransitionGroup>
+            {this.state.favorites.map(({ id, name }) => (
+              <CSSTransition 
+                timeout={500} 
+                classNames="fade" 
+                key={id}>
+                  <div className="favorite">{name}</div>
+              </CSSTransition>
+            ))}
           </TransitionGroup>
         </div>
+        
       </div>
     );
   }
