@@ -1,97 +1,63 @@
 :root {
-  --toggler-width: 120px;
-  --toggler-height: 40px;
-  --toggler-bg-color: #ffbf00;
-  --toggler-active-bg-color: #ffcf40;
-  --menu-starting-top: 0px;
-  --menu-ending-top: 45px;
-  --menu-width: 200px;
-  --menu-max-height: 200px;
-  --menu-bg-color: #ffdc73;
-  --fade-from-color: transparent;
-  --fade-to-color: black;
-  --timeout: 350ms;
+  --timeout: 500ms;
+  --list-item-max-height: 30px;
+}
+
+ul {
+  margin: 0;
+  padding: 0 10px;
 }
 
 .container {
-  position: relative;
+  display: flex;
 }
 
-.toggler {
-  position: relative;
-  z-index: 2;
-  width: var(--toggler-width);
-  height: var(--toggler-height);
-  background-color: var(--toggler-bg-color);
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 350ms;
-}
-
-.toggler--active {
-  background-color: var(--toggler-active-bg-color);
-}
-
-.menu {
-  position: absolute;
-  top: var(--menu-ending-top);
-  z-index: 1;
-  box-sizing: border-box;
-  width: var(--menu-width);
-  padding: 0 20px;
-  overflow: hidden;
-  background-color: var(--menu-bg-color);
-  border-radius: 5px;
-}
-
-.list {
+.ingredients {
+  width: 50%;
+  margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
+.ingredient {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.star {
+  margin-left: 5px;
+  color: gold;
+}
+
+.favorites {
+  box-sizing: border-box;
+  width: 50%;
+  padding: 10px;
+  background-color: papayawhip;
+}
+
 .list-item {
-  padding: 5px 0;
+ padding: 10px;
 }
 
-.list-item--active {
-  color: green;
-  transition: color 250ms;
+.fade-enter {
+  max-height: 0;
+  opacity: 0;
 }
 
-.balloon-enter,
-.balloon-appear{
-  top: var(--menu-starting-top);
-  width: var(--toggler-width);
-  max-height: var(--toggler-height);
-  color: var(--fade-from-color);
-  background-color: var(--toggler-bg-color);
-}
-
-.balloon-enter-active,
-.balloon-appear-active {
-  top: var(--menu-ending-top);
-  width: var(--menu-width);
-  max-height: var(--menu-max-height);
-  color: var(--fade-to-color);
-  background-color: var(--menu-bg-color);
+.fade-enter-active {
+  max-height: var(--list-item-max-height);
+  opacity: 1;
   transition: all var(--timeout);
 }
 
-.balloon-exit {
-  top: var(--menu-ending-top);
-  width: var(--menu-width);
-  max-height: var(--menu-max-height);
-  color: var(--fade-to-color);
-  background-color: var(--menu-bg-color);
+.fade-exit {
+  max-height: var(--list-item-max-height);
+  opacity: 1;
 }
 
-.balloon-exit-active {
-  top: var(--menu-starting-top);
-  width: var(--toggler-width);
-  max-height: var(--toggler-height);
-  color: var(--fade-from-color);
-  background-color: var(--toggler-bg-color);
+.fade-exit-active {
+  max-height: 0;
+  opacity: 0;
   transition: all var(--timeout);
 }
