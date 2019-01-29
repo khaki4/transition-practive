@@ -6,7 +6,8 @@ import "./index.css";
 
 class App extends Component {
   state = {
-    showBalloon: false
+    showBalloon: false,
+    highlightedMenuItem: false
   };
 
   toggle = () => {
@@ -14,6 +15,12 @@ class App extends Component {
       showBalloon: !prevState.showBalloon
     }));
   };
+
+  toggleHighlightedMenuItem = () => {
+    this.setState(state => ({
+      highlightedMenuItem: !state.highlightedMenuItem
+    }));
+  }
 
   render() {
     return (
@@ -32,14 +39,19 @@ class App extends Component {
           timeout={350}
           classNames="balloon"
           unmountOnExit
-          appear // 첫 load 시 transition
-          enter={false} // enter 관련 transition false
-          exit={false} // exit 관련 transition false
+          onEntered={this.toggleHighlightedMenuItem}
+          onExited={this.toggleHighlightedMenuItem}
         >
           <div className="menu">
             <ul className="list">
               <li className="list-item">Home</li>
-              <li className="list-item">Profile</li>
+              <li
+                className={cx('list-item', {
+                  'list-item--active': this.state.highlightedMenuItem,
+                })}
+              >
+                Profile
+              </li>
               <li className="list-item">Favorites</li>
               <li className="list-item">Sign out</li>
             </ul>
